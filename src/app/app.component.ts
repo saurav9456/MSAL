@@ -1,12 +1,33 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
+import { CommonModule } from '@angular/common';
+import { TableComponent } from "./table/table.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, TableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'MsalAuthentication';
+  private msalService = inject(MsalService);
+  isLoggedIn = false;
+  username: string | undefined;
+
+  constructor() {
+    const accounts = this.msalService.instance.getAllAccounts();
+    if (accounts.length > 0) {
+      this.isLoggedIn = true;
+      this.username = accounts[0].username;
+    }
+  }
+
+  login() {
+    this.msalService.loginRedirect();
+  }
+
+  logout() {
+    this.msalService.logoutRedirect();
+  }
 }

@@ -1,0 +1,33 @@
+<table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of dataSource">
+        <ng-container *ngIf="row.isEditing; else viewMode">
+          <td>
+            <input type="text" [formControl]="nameControl" />
+          </td>
+          <td>
+            <input type="number" [formControl]="ageControl" />
+          </td>
+          <td>
+            <button (click)="onSubmit(row)">Save</button>
+            <button (click)="onCancel(row)">Cancel</button>
+          </td>
+        </ng-container>
+        <ng-template #viewMode>
+          <td>{{ row.name }}</td>
+          <td>{{ row.age }}</td>
+          <td>
+            <button (click)="onEditClick(row)">Edit</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+  
