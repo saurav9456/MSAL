@@ -15,6 +15,7 @@ export class AppComponent {
   isLoggedIn = false;
   username: string | undefined;
 
+  //This should be in ngonit, but we are using standalone components
   constructor() {
     const accounts = this.msalService.instance.getAllAccounts();
     if (accounts.length > 0) {
