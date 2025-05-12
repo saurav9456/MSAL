@@ -3,11 +3,11 @@
  <h3>This is authentication provided by Microsoft Azure</h3>
  <h4>Token regeneration i am working now</h4>
  <h5>Token is genereated</h5>
+ <h6>Msal done</h6>
 <div class="container">
   <div *ngIf="!isLoggedIn" class="login-box">
     <button (click)="login()">Login with Microsoft</button>
   </div>
-
   <div *ngIf="isLoggedIn" class="user-box">
     <p>Welcome, {{ username }}</p>
     <button (click)="logout()">Logout</button>
